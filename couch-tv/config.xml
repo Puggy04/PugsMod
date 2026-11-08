@@ -16,6 +16,8 @@
     <!-- Receive remote keys beyond the D-pad (colour keys, media keys) -->
     <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <!-- Show an HDMI input (Xbox) full screen -->
+    <tizen:privilege name="http://tizen.org/privilege/tv.window"/>
 
     <tizen:profile name="tv-samsung"/>
     <tizen:setting screen-orientation="landscape"
