@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>Couch TV</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Everything static lives inside #stage so it can be pixel-shifted (OLED care). -->
+  <main id="stage">
+    <header class="top">
+      <div class="greeting" id="greeting"></div>
+      <div class="clock" id="clock"></div>
+    </header>
+
+    <section class="row" aria-label="Apps">
+      <h2 class="row-title">Watch</h2>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <footer class="hints" id="hints">
+      <span><kbd>◀ ▶ ▲ ▼</kbd> move</span>
+      <span><kbd>OK</kbd> open</span>
+      <span><kbd>A</kbd> red · screen off</span>
+      <span><kbd>Back</kbd> exit</span>
+    </footer>
+  </main>
+
+  <!-- Near-black screensaver with a slowly drifting clock. -->
+  <div id="saver" hidden><div id="saver-clock"></div></div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

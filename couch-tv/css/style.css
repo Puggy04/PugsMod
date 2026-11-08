@@ -1,0 +1,118 @@
+/* Designed for 1920x1080 (Tizen scales to the 4K panel). True black background
+   keeps OLED pixels off; text is soft grey rather than pure white. */
+:root {
+  --bg: #000;
+  --fg: #c9ced6;
+  --dim: #6b7380;
+  --focus: #e8ecf2;
+  --tile-w: 360px;
+  --tile-h: 202px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "SamsungOne", "Samsung Sans", system-ui, sans-serif;
+  cursor: none;
+}
+
+#stage {
+  position: absolute;
+  inset: 0;
+  padding: 96px 120px; /* stays inside TV overscan-safe area */
+  transition: transform 2s ease, opacity .4s ease;
+}
+
+.top { display: flex; justify-content: space-between; align-items: baseline; }
+.greeting { font-size: 44px; font-weight: 300; color: var(--dim); }
+.clock { font-size: 72px; font-weight: 200; letter-spacing: 2px; }
+
+.row { margin-top: 140px; }
+.row-title { font-size: 32px; font-weight: 400; color: var(--dim); margin-bottom: 28px; }
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, var(--tile-w));
+  gap: 40px 48px;
+}
+
+.tile {
+  position: relative;
+  width: var(--tile-w);
+  height: var(--tile-h);
+  border-radius: 18px;
+  background: #11151b;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px 28px;
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--fg);
+  opacity: .55;                 /* unfocused tiles stay dim */
+  transform: scale(.96);
+  transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+  overflow: hidden;
+}
+.tile::before {                 /* brand colour stripe — small, not a big static block */
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 10px;
+  background: var(--brand, #444);
+}
+.tile.missing::after {
+  content: "web";
+  position: absolute;
+  top: 18px; right: 22px;
+  font-size: 20px;
+  color: var(--dim);
+}
+.tile.focused {
+  opacity: 1;
+  transform: scale(1.04);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+.hints {
+  position: absolute;
+  left: 120px; right: 120px; bottom: 72px;
+  display: flex; gap: 48px;
+  font-size: 22px;
+  color: var(--dim);
+  opacity: .7;
+}
+kbd { font-family: inherit; color: var(--fg); margin-right: 8px; }
+
+#saver {
+  position: fixed; inset: 0;
+  background: #000;
+  z-index: 10;
+}
+#saver-clock {
+  position: absolute;
+  font-size: 64px;
+  font-weight: 200;
+  color: #2a2e34;               /* very dim to avoid wear */
+  transition: left 3s ease, top 3s ease;
+}
+
+#toast {
+  position: fixed;
+  left: 50%; bottom: 140px;
+  transform: translateX(-50%);
+  padding: 16px 32px;
+  border-radius: 12px;
+  background: #1a1f27;
+  font-size: 26px;
+  opacity: 0;
+  transition: opacity .25s ease;
+  z-index: 20;
+}
+#toast.show { opacity: 1; }
+
+body.off #stage { opacity: 0; }

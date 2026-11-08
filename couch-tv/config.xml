@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="https://github.com/puggy04/pugsmod/couch-tv"
+        version="1.0.0"
+        viewmodes="maximized">
+    <tizen:application id="PugCouch01.CouchTV" package="PugCouch01" required_version="6.5"/>
+    <name>Couch TV</name>
+    <content src="index.html"/>
+    <icon src="icon.png"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+
+    <!-- Launch other installed apps (Netflix, YouTube, Plex, ...) -->
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.info"/>
+    <!-- Receive remote keys beyond the D-pad (colour keys, media keys) -->
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+
+    <tizen:profile name="tv-samsung"/>
+    <tizen:setting screen-orientation="landscape"
+                   context-menu="disable"
+                   background-support="disable"
+                   encryption="disable"
+                   install-location="auto"
+                   hwkey-event="enable"/>
+    <access origin="*" subdomains="true"/>
+</widget>
